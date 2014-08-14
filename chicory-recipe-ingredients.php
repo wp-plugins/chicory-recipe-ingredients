@@ -64,9 +64,9 @@ function chicory_plugin_load_function(){
 		add_action( 'admin_menu', 'chicory_admin_menu' );
 	} else {
 		if(get_option( 'chicory_location_button' ) == 'top') {
-			add_filter( 'the_content', 'chicory_top_recipe_display' );
+			add_filter( 'the_content', 'chicory_top_recipe_display',1 );
 		} else if(get_option( 'chicory_location_button' ) == 'bottom') {
-			add_filter( 'the_content', 'chicory_bottom_recipe_display' );
+			add_filter( 'the_content', 'chicory_bottom_recipe_display' ,1);
 		} else if(get_option( 'chicory_location_button' ) == 'shortcode') {
 			add_shortcode( 'chicory', 'chicory_shortcode_recipe_display' );
 		}
@@ -160,7 +160,7 @@ function chicory_top_recipe_display( $content ) {
 **/
 function chicory_bottom_recipe_display( $content ) {
    if(is_single()) {
-		$content.= '<div class="chicory-order-ingredients"></div>';
+     	$content.= '<div class="chicory-order-ingredients"></div>';
    }
    return $content;
 }
@@ -175,5 +175,4 @@ function chicory_shortcode_recipe_display() {
    $content = '<div class="chicory-order-ingredients"></div>';
    return $content;
 }
-
 ?>
