@@ -2,9 +2,9 @@
 Contributors: chicory
 Donate link: http://www.chicoryapp.com/
 Tags: Chicory, recipes, ingredients, grocery, stores, cook
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 1.0
+Requires at least: 3.0
+Tested up to: 3.9.2
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,14 +95,24 @@ Easy! They can deselect the ingredients they already have and they will automati
 == Screenshots ==
 
 1. Chicory Recipe Ingredients Settings.
+2. Chicory Recipe Ingredients Button.
 
 == Changelog ==
+
+= 1.1 =
+
+* Remove Top Of Recipe Setting..
+* Add Below Ziplist Setting.
+* Add Below EasyRecipe Setting.
 
 = 1.0 =
 
 * First version.
 
 == Upgrade Notice ==
+
+= 1.1 =
+Visit us at [chicoryapp.com](http://chicoryapp.com/) to learn more.
 
 = 1.0 =
 Visit us at [chicoryapp.com](http://chicoryapp.com/) to learn more.
