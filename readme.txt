@@ -101,7 +101,7 @@ Easy! They can deselect the ingredients they already have and they will automati
 
 = 1.1 =
 
-* Remove Top Of Recipe Setting..
+* Remove Top Of Recipe Setting.
 * Add Below Ziplist Setting.
 * Add Below EasyRecipe Setting.
 
