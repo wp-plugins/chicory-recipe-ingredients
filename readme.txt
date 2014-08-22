@@ -1,7 +1,7 @@
 ﻿=== Chicory Recipe Ingredients ===
 Contributors: chicory
 Donate link: http://www.chicoryapp.com/
-Tags: Chicory, recipes, ingredients, grocery, stores, cook
+Tags: chicory, recipe, ingredients, grocery, store, cook
 Requires at least: 3.0
 Tested up to: 3.9.2
 Stable tag: 1.1

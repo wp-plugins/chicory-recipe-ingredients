@@ -58,6 +58,8 @@ function chicory_plugin_load_function(){
 	if ( is_admin() ) {
 		add_action( 'admin_menu', 'chicory_admin_menu' );
 	} else {
+		add_action( 'wp_enqueue_scripts', 'chicory_scripts' );
+		
 		$chicory_location_button = get_option( 'chicory_location_button' );
 		if( $chicory_location_button == 'bottom' ) {
 			add_filter( 'the_content', 'chicory_bottom_recipe_display', 1 );
@@ -68,7 +70,6 @@ function chicory_plugin_load_function(){
 		} else if( $chicory_location_button == 'shortcode' ) {
 			add_shortcode( 'chicory', 'chicory_shortcode_recipe_display' );
 		}
-		add_action( 'wp_enqueue_scripts', 'chicory_scripts' );
 	}	
 }
 add_action( 'plugins_loaded','chicory_plugin_load_function' );
@@ -92,7 +93,7 @@ function chicory_scripts() {
 *
 **/
 function chicory_admin_menu() { 
-	add_menu_page('Chicory Recipe Ingredients', 'Chicory', 'administrator', __FILE__, 'chicory_settings_page',plugins_url('/icon/icon.png', __FILE__), 82);
+	add_menu_page('Chicory Recipe Ingredients', 'Chicory', 'administrator', __FILE__, 'chicory_settings_page', plugins_url('/icon/icon.png', __FILE__), 82);
 
 	add_action( 'admin_init', 'chicory_register_settings' );
 }
@@ -127,9 +128,9 @@ function chicory_settings_page() { ?>
 			<tr>
 				<td>
 					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="bottom" <?php echo ((get_option('chicory_location_button') == 'bottom') ? 'checked="checked"' : '') ?> /><?php _e( 'Bottom of recipe', 'chicory-recipe' ) ?><br/><br/>
-					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="ziplist" <?php echo ((get_option('chicory_location_button') == 'ziplist') ? 'checked="checked"' : '') ?> /><?php _e( 'Below Ziplist', 'chicory-recipe' ) ?><br/><br/>
-					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="easyrecipe" <?php echo ((get_option('chicory_location_button') == 'easyrecipe') ? 'checked="checked"' : '') ?> /><?php _e( 'Below EasyRecipe', 'chicory-recipe' ) ?><br/><br/>
-					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="shortcode" <?php echo ((get_option('chicory_location_button') == 'shortcode') ? 'checked="checked"' : '') ?> /><?php _e( 'ShortCode* [chicory]', 'chicory-recipe' ) ?>
+					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="ziplist" <?php echo ( ( get_option('chicory_location_button') == 'ziplist' ) ? 'checked="checked"' : '' ) ?> /><?php _e( 'Below Ziplist', 'chicory-recipe' ) ?><br/><br/>
+					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="easyrecipe" <?php echo ( ( get_option('chicory_location_button') == 'easyrecipe' ) ? 'checked="checked"' : '' ) ?> /><?php _e( 'Below EasyRecipe', 'chicory-recipe' ) ?><br/><br/>
+					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="shortcode" <?php echo ( ( get_option('chicory_location_button' ) == 'shortcode' ) ? 'checked="checked"' : '') ?> /><?php _e( 'ShortCode* [chicory]', 'chicory-recipe' ) ?>
 					<p><?php _e( 'Note: * this option lets you have full control over the location of the button. However, it requires to put the short code [chicory] in every post or install it in your template. contact Chicory for the best place to install it in your template.', 'chicory-recipe' ) ?></p>
 				</td>
 			</tr>
@@ -147,11 +148,11 @@ function chicory_settings_page() { ?>
 *
 **/
 function chicory_bottom_recipe_display( $content ) {
-   if(is_single()) {
-		$chicory_content .= $content;
-     	$chicory_content.= '<div class="chicory-order-ingredients"></div>';
+	if(is_single()) {
+		$chicory_content  = $content;
+		$chicory_content .= '<div class="chicory-order-ingredients"></div>';
 		return $chicory_content;
-   } 
+	}
 }
 
 /**
@@ -161,8 +162,10 @@ function chicory_bottom_recipe_display( $content ) {
 *
 **/
 function chicory_shortcode_recipe_display() {
-   $content = '<div class="chicory-order-ingredients"></div>';
-   return $content;
+	if(is_single()) {
+		$chicory_content = '<div class="chicory-order-ingredients"></div>';
+		return $chicory_content;
+	}
 }
 
 /**
@@ -172,20 +175,22 @@ function chicory_shortcode_recipe_display() {
 *
 **/
 function chicory_ziplist_recipe_display() {
-	global $wpdb; 
-	$post_id = get_the_ID();
-	$ziplist = $wpdb->get_row( "SELECT * FROM " . $wpdb->prefix . "posts WHERE post_content LIKE '%amd-zlrecipe-recipe%' AND ID = " . $post_id );
-	if( $ziplist ) {  ?>
-	   <script type="text/javascript" >
-			jQuery(document).ready(function($) {
-				if( jQuery('.zlrecipe-container-border')[0] ) {
-					jQuery('<div class="chicory-order-ingredients"></div>').insertAfter( jQuery('.zlrecipe-container-border') );
-				}
-			});
-		</script>
-	<?php 
-	} else {
-		add_filter( 'the_content', 'chicory_bottom_recipe_display', 1 );
+	if (is_single()) {
+		global $wpdb; 
+		$post_id = get_the_ID();
+		$ziplist = $wpdb->get_row( "SELECT * FROM " . $wpdb->prefix . "posts WHERE post_content LIKE '%amd-zlrecipe-recipe%' AND ID = " . $post_id );
+		if( $ziplist ) {  ?>
+		   <script type="text/javascript" >
+				jQuery(document).ready(function($) {
+					if( jQuery('.zlrecipe-container-border')[0] ) {
+						jQuery('<div class="chicory-order-ingredients"></div>').insertAfter( jQuery('.zlrecipe-container-border') );
+					}
+				});
+			</script>
+		<?php 
+		} else {
+			add_filter( 'the_content', 'chicory_bottom_recipe_display', 1 );
+		}
 	}
 }
 
@@ -196,20 +201,22 @@ function chicory_ziplist_recipe_display() {
 *
 **/
 function chicory_easyrecipe_recipe_display() {
-	global $wpdb;
-	$post_id = get_the_ID(); 
-	$easyrecipe = $wpdb->get_row( "SELECT * FROM " . $wpdb->prefix . "posts WHERE post_content LIKE '%easyrecipe%' AND post_content LIKE '%endeasyrecipe%' AND ID = " . $post_id );	
-	if( $easyrecipe ) { ?>
-	   <script type="text/javascript" >
-			jQuery(document).ready(function($) {
-				if( jQuery('.easyrecipe')[0] ) {
-					jQuery('<div class="chicory-order-ingredients"></div>').insertAfter( jQuery('.easyrecipe') );
-				}
-			});			
-		</script>
-	<?php
-	} else {
-		add_filter( 'the_content', 'chicory_bottom_recipe_display', 1 );
+    if (is_single()) {
+		global $wpdb;
+		$post_id = get_the_ID(); 
+		$easyrecipe = $wpdb->get_row( "SELECT * FROM " . $wpdb->prefix . "posts WHERE post_content LIKE '%easyrecipe%' AND post_content LIKE '%endeasyrecipe%' AND ID = " . $post_id );	
+		if( $easyrecipe ) { ?>
+		   <script type="text/javascript" >
+				jQuery(document).ready(function($) {
+					if( jQuery('.easyrecipe')[0] ) {
+						jQuery('<div class="chicory-order-ingredients"></div>').insertAfter( jQuery('.easyrecipe') );
+					}
+				});			
+			</script>
+		<?php
+		} else {
+			add_filter( 'the_content', 'chicory_bottom_recipe_display', 1 );
+		}
 	}
 }
 ?>
