@@ -101,8 +101,8 @@ Easy! They can deselect the ingredients they already have and they will automati
 
 = 1.2 =
 
-* Remove front page and other pages chicory button diplay.
-* Chicory button only diplay on single post.
+* Remove chicory button from front page and other pages.
+* Chicory button only display on single post.
 
 = 1.1 =
 
