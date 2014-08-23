@@ -101,7 +101,8 @@ Easy! They can deselect the ingredients they already have and they will automati
 
 = 1.2 =
 
-* Resolve bug of home page diplay.
+* Remove front page and other pages chicory button diplay.
+* Chicory button only diplay on single post.
 
 = 1.1 =
 
@@ -117,4 +118,3 @@ Easy! They can deselect the ingredients they already have and they will automati
 
 = 1.2 =
 Visit us at [chicoryapp.com](http://chicoryapp.com/) to learn more.
-
