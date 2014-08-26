@@ -1,10 +1,10 @@
 ﻿=== Chicory Recipe Ingredients ===
 Contributors: chicory
 Donate link: http://www.chicoryapp.com/
-Tags: chicory, recipe, ingredients, grocery, store, cook
+Tags: chicory, recipe, ingredients, chicoryapp, grocery, store, cook, button
 Requires at least: 3.0
 Tested up to: 3.9.2
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,10 @@ Easy! They can deselect the ingredients they already have and they will automati
 
 == Changelog ==
 
+= 1.3 =
+
+* Resolve bugs of not displaying content and images on blog and index page.
+
 = 1.2 =
 
 * Remove chicory button from front page and other pages.
@@ -116,5 +120,5 @@ Easy! They can deselect the ingredients they already have and they will automati
 
 == Upgrade Notice ==
 
-= 1.2 =
+= 1.3 =
 Visit us at [chicoryapp.com](http://chicoryapp.com/) to learn more.
