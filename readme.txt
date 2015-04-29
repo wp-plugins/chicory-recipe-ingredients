@@ -92,8 +92,6 @@ Otherwise, Chicory users can deselect ingredients that they already have and tho
 = 1.5 =
 * Updated button location settings.
 
-= 1.4 =
-
 = 1.3 =
 * Resolve bugs of not displaying content and images on blog and index page.
 
