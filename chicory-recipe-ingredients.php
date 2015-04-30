@@ -13,7 +13,7 @@ define('CHICORY_PLUGIN_URL', 			plugin_dir_url(__FILE__));
 define('CHICORY_PLUGIN_PATH',			plugin_dir_path(__FILE__));
 define('CHICORY_PLUGIN_BASENAME', 		plugin_basename(__FILE__));
 define('CHICORY_PLUGIN_REL_DIR', 		dirname(PLUGIN_BASENAME));
-define('CHICORY_WIDGET_DOMAIN',         'localhost:8000');
+define('CHICORY_WIDGET_DOMAIN',         'www.chicoryapp.com');
 
 const BUTTON_LOCATION_BELOW_INGREDIENTS = 'below-ingredient';
 const BUTTON_LOCATION_BELOW_RECIPE      = 'below-recipe';
@@ -42,22 +42,22 @@ function chicory_settings_page() {
 <div class="wrap">
 	<h2>Chicory Recipe Ingredients</h2>
 	<form method="post" action="options.php">
-		<?= settings_fields('chicory-settings-group') ?>
-		<?= do_settings_sections('chicory-settings-group') ?>
+		<?php settings_fields('chicory-settings-group') ?>
+		<?php do_settings_sections('chicory-settings-group') ?>
 		<table class="form-table">
 			<tr valign="top">
 				<th scope="row">What location would you like to display the Chicory button?</th>
 			</tr>
 			<tr>
 				<td>
-					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="<?= BUTTON_LOCATION_BELOW_INGREDIENTS ?>" <?= ($option == BUTTON_LOCATION_BELOW_INGREDIENTS) ? 'checked="checked"' : '' ?> />Below Ingredient List<br/><br/>
-					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="<?= BUTTON_LOCATION_BELOW_RECIPE ?>" <?= ($option == BUTTON_LOCATION_BELOW_RECIPE) ? 'checked="checked"' : '' ?> />Below Recipe<br/><br/>
-					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="<?= BUTTON_LOCATION_BELOW_POST ?>" <?= ($option == BUTTON_LOCATION_BELOW_POST) ? 'checked="checked"' : '' ?> />Bottom of Post<br/><br/>
+					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="<?php echo BUTTON_LOCATION_BELOW_INGREDIENTS ?>" <?php echo ($option == BUTTON_LOCATION_BELOW_INGREDIENTS) ? 'checked="checked"' : '' ?> />Below Ingredient List<br/><br/>
+					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="<?php echo BUTTON_LOCATION_BELOW_RECIPE ?>" <?php echo ($option == BUTTON_LOCATION_BELOW_RECIPE) ? 'checked="checked"' : '' ?> />Below Recipe<br/><br/>
+					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="<?php echo BUTTON_LOCATION_BELOW_POST ?>" <?php echo ($option == BUTTON_LOCATION_BELOW_POST) ? 'checked="checked"' : '' ?> />Bottom of Post<br/><br/>
 				</td>
 			</tr>
 			</tr>
 		</table>
-		<?= submit_button() ?>
+		<?php submit_button() ?>
 	</form>
 </div>
 <?php
