@@ -37,7 +37,7 @@ function chicory_admin_menu() {
 }
 
 function chicory_settings_page() {
-    $option = get_option('chicory_location_button');
+    $option = get_option('chicory_location_button') ?: BUTTON_LOCATION_BELOW_INGREDIENTS;
 ?>
 <div class="wrap">
 	<h2>Chicory Recipe Ingredients</h2>
@@ -78,7 +78,7 @@ function chicory_display($content) {
     }
 
     libxml_use_internal_errors(true);
-    $location = get_option('chicory_location_button');
+    $location = get_option('chicory_location_button') ?: BUTTON_LOCATION_BELOW_INGREDIENTS;
     $doc = new DOMDocument();
     $doc->loadHTML('<?xml encoding="UTF-8">' . mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8"));
     $xpath = new DOMXPath($doc);

@@ -89,6 +89,9 @@ Otherwise, Chicory users can deselect ingredients that they already have and tho
 
 == Changelog ==
 
+= 1.6 =
+* Added a default for the location setting.
+
 = 1.5 =
 * Updated button location settings.
 
