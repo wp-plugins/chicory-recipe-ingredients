@@ -89,6 +89,9 @@ Otherwise, Chicory users can deselect ingredients that they already have and tho
 
 == Changelog ==
 
+= 1.7 =
+* Defaulting button location to bottom of post when PHP extensions libxml, dom, or mbstring are missing.
+
 = 1.6 =
 * Added a default for the location setting.
 
