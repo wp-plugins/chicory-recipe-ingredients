@@ -4,7 +4,7 @@ Donate link: http://www.chicoryapp.com/
 Tags: chicory, recipe, ingredients, chicoryapp, grocery, store, cook, button
 Requires at least: 3.0
 Tested up to: 4.2.1
-Stable tag: 1.5
+Stable tag: 1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,12 @@ Otherwise, Chicory users can deselect ingredients that they already have and tho
 2. Chicory Recipe Ingredients Button.
 
 == Changelog ==
+
+= 1.7 =
+* Defaulting button location to bottom of post when PHP extensions libxml, dom, or mbstring are missing.
+
+= 1.6 =
+* Added a default for the location setting.
 
 = 1.5 =
 * Updated button location settings.
