@@ -74,7 +74,11 @@ function chicory_scripts() {
 function chicory_display($content) {
     // Check that necessary extensions are present
     if (!extension_loaded('libxml') || !extension_loaded('dom') || !extension_loaded('mbstring')) {
-        return $content;
+	    return $content
+	        . '<div class="chicory-order-ingredients-container" style="margin-top:10px !important">'
+	        .   '<div class="chicory-order-ingredients"></div>'
+			. '</div>'
+	    ;
     }
 
     libxml_use_internal_errors(true);
