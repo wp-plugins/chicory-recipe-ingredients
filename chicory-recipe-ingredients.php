@@ -19,47 +19,75 @@ define('BUTTON_LOCATION_BELOW_INGREDIENTS', 'below-ingredient');
 define('BUTTON_LOCATION_BELOW_RECIPE',      'below-recipe');
 define('BUTTON_LOCATION_BELOW_POST',        'below-post');
 
-function chicory_activate() {			
-	add_option('chicory_location_button', BUTTON_LOCATION_BELOW_INGREDIENTS, '', 'yes');
+function chicory_activate() {
+    add_option('chicory_location_button', BUTTON_LOCATION_BELOW_INGREDIENTS, '', 'yes');
 }
 
 function chicory_deactivate() {
-	delete_option('chicory_location_button');
+    delete_option('chicory_location_button');
 }
 
 function chicory_uninstall() {
-	delete_option('chicory_location_button');
+    delete_option('chicory_location_button');
 }
 
-function chicory_admin_menu() { 
-	add_menu_page('Chicory Recipe Ingredients', 'Chicory', 'administrator', __FILE__, 'chicory_settings_page', plugins_url('/icon/icon.png', __FILE__), 82);
-	add_action('admin_init', 'chicory_register_settings');
+function chicory_admin_menu() {
+    add_menu_page('Chicory Recipe Ingredients', 'Chicory', 'administrator', __FILE__, 'chicory_settings_page', plugins_url('/icon/icon.png', __FILE__), 82);
+    add_action('admin_init', 'chicory_register_settings');
 }
 
 function chicory_settings_page() {
-    $option = get_option('chicory_location_button') ?: BUTTON_LOCATION_BELOW_INGREDIENTS;
-?>
-<div class="wrap">
-	<h2>Chicory Recipe Ingredients</h2>
-	<form method="post" action="options.php">
-		<?php settings_fields('chicory-settings-group') ?>
-		<?php do_settings_sections('chicory-settings-group') ?>
-		<table class="form-table">
-			<tr valign="top">
-				<th scope="row">What location would you like to display the Chicory button?</th>
-			</tr>
-			<tr>
-				<td>
-					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="<?php echo BUTTON_LOCATION_BELOW_INGREDIENTS ?>" <?php echo ($option == BUTTON_LOCATION_BELOW_INGREDIENTS) ? 'checked="checked"' : '' ?> />Below Ingredient List<br/><br/>
-					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="<?php echo BUTTON_LOCATION_BELOW_RECIPE ?>" <?php echo ($option == BUTTON_LOCATION_BELOW_RECIPE) ? 'checked="checked"' : '' ?> />Below Recipe<br/><br/>
-					<input type="radio" id="chicory_location_button" name="chicory_location_button" value="<?php echo BUTTON_LOCATION_BELOW_POST ?>" <?php echo ($option == BUTTON_LOCATION_BELOW_POST) ? 'checked="checked"' : '' ?> />Bottom of Post<br/><br/>
-				</td>
-			</tr>
-			</tr>
-		</table>
-		<?php submit_button() ?>
-	</form>
-</div>
+    $location = !extensions_available() ? BUTTON_LOCATION_BELOW_POST : (get_option('chicory_location_button') ?: BUTTON_LOCATION_BELOW_INGREDIENTS);
+    ?>
+    <div class="wrap">
+        <h2>Chicory Recipe Ingredients</h2>
+        <?php
+        if (!extensions_available()) {
+            ?>
+            <div style="background-color: #FFBABA; color: #D8000C; border: 1px solid #ff0000; padding: 10px">
+                <h4>These settings need PHP version 5 or above, as well as the following PHP extensions to work correctly.</h4>
+                <ul style="list-style-type: circle; padding-left: 20px">
+                    <li>php-libxml</li>
+                    <li>php-dom</li>
+                    <li>php-mbstring</li>
+                </ul>
+            </div>
+        <?php
+        }
+        ?>
+        <form method="post" action="options.php">
+            <?php settings_fields('chicory-settings-group') ?>
+            <?php do_settings_sections('chicory-settings-group') ?>
+            <table class="form-table">
+                <tr valign="top">
+                    <th scope="row">Where would you like to display the Chicory button?</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" id="chicory_location_button" name="chicory_location_button"
+							value="<?php echo BUTTON_LOCATION_BELOW_INGREDIENTS ?>"
+                            <?php echo ( $location == BUTTON_LOCATION_BELOW_INGREDIENTS ) ? 'checked="checked"' : '' ?>
+                            <?php echo ( !extensions_available() ) ? 'disabled' : '' ?> />
+                            Below Ingredient List<br/><br/>
+
+                        <input type="radio" id="chicory_location_button" name="chicory_location_button"
+							value="<?php echo BUTTON_LOCATION_BELOW_RECIPE ?>"
+                            <?php echo ( $location == BUTTON_LOCATION_BELOW_RECIPE ) ? 'checked="checked"' : '' ?>
+                            <?php echo ( !extensions_available() ) ? 'disabled' : '' ?> />
+                            Below Recipe<br/><br/>
+
+                        <input type="radio" id="chicory_location_button" name="chicory_location_button"
+							value="<?php echo BUTTON_LOCATION_BELOW_POST ?>"
+                            <?php echo ( $location == BUTTON_LOCATION_BELOW_POST ) ? 'checked="checked"' : '' ?>
+                            <?php echo ( !extensions_available() ) ? 'disabled' : '' ?> />
+                            Bottom of Post<br/><br/>
+                    </td>
+                </tr>
+                </tr>
+            </table>
+            <?php submit_button() ?>
+        </form>
+    </div>
 <?php
 }
 
@@ -73,12 +101,12 @@ function chicory_scripts() {
 
 function chicory_display($content) {
     // Check that necessary extensions are present
-    if (!extension_loaded('libxml') || !extension_loaded('dom') || !extension_loaded('mbstring')) {
-	    return $content
-	        . '<div class="chicory-order-ingredients-container" style="margin-top:10px !important">'
-	        .   '<div class="chicory-order-ingredients"></div>'
-			. '</div>'
-	    ;
+    if (!extensions_available()) {
+        return $content
+               . '<div class="chicory-order-ingredients-container" style="margin-top:10px !important">'
+               .   '<div class="chicory-order-ingredients"></div>'
+               . '</div>'
+            ;
     }
 
     libxml_use_internal_errors(true);
@@ -127,6 +155,10 @@ function chicory_plugin_load_function() {
         add_action('wp_enqueue_scripts', 'chicory_scripts');
         add_filter('the_content', 'chicory_display', 20);
     }
+}
+
+function extensions_available() {
+    return phpversion()[0] >= 5 && extension_loaded('libxml') && extension_loaded('dom') && extension_loaded('mbstring');
 }
 
 register_activation_hook(__FILE__, 'chicory_activate');
