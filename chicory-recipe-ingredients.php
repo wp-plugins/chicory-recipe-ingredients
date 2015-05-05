@@ -118,7 +118,7 @@ function chicory_display($content) {
     // Chicory container
     $buttonContainer = $doc->createElement('div');
     $buttonContainer->setAttribute('class', 'chicory-order-ingredients-container');
-    $buttonContainer->setAttribute('style', 'margin-top:10px !important');
+    $buttonContainer->setAttribute('style', 'margin:10px !important');
 
     // Microdata format (Easyrecipe, Recipe Card)
     if ($xpath->query('//*[contains(@itemtype, "//schema.org/Recipe") or contains(@itemtype, "//schema.org/recipe")]')->length) {
