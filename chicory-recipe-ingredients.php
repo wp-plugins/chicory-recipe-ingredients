@@ -15,9 +15,9 @@ define('CHICORY_PLUGIN_BASENAME', 		plugin_basename(__FILE__));
 define('CHICORY_PLUGIN_REL_DIR', 		dirname(PLUGIN_BASENAME));
 define('CHICORY_WIDGET_DOMAIN',         'www.chicoryapp.com');
 
-const BUTTON_LOCATION_BELOW_INGREDIENTS = 'below-ingredient';
-const BUTTON_LOCATION_BELOW_RECIPE      = 'below-recipe';
-const BUTTON_LOCATION_BELOW_POST        = 'below-post';
+define('BUTTON_LOCATION_BELOW_INGREDIENTS', 'below-ingredient');
+define('BUTTON_LOCATION_BELOW_RECIPE',      'below-recipe');
+define('BUTTON_LOCATION_BELOW_POST',        'below-post');
 
 function chicory_activate() {			
 	add_option('chicory_location_button', BUTTON_LOCATION_BELOW_INGREDIENTS, '', 'yes');
