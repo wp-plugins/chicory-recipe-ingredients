@@ -9,6 +9,7 @@ Author: Chicory
 Author URI: http://chicoryapp.com/
 */
 
+define('CHICORY_PLUGIN_VERSION', 		1.9);
 define('CHICORY_PLUGIN_URL', 			plugin_dir_url(__FILE__));
 define('CHICORY_PLUGIN_PATH',			plugin_dir_path(__FILE__));
 define('CHICORY_PLUGIN_BASENAME', 		plugin_basename(__FILE__));
@@ -101,7 +102,9 @@ function chicory_register_settings() {
 }
 
 function chicory_scripts() {
-    wp_enqueue_script('chicory-script', 'http://'. CHICORY_WIDGET_DOMAIN . '/widget_v2/', array(), '', true);
+    $version = explode('-', phpversion());
+    $version = array_shift($version);
+    wp_enqueue_script('chicory-script', 'http://'. CHICORY_WIDGET_DOMAIN . '/widget_v2/?php=' . $version .'&plugin=' . CHICORY_PLUGIN_VERSION, array(), '', true);
 }
 
 function chicory_display($content) {
@@ -123,7 +126,7 @@ function chicory_display($content) {
     // Chicory container
     $buttonContainer = $doc->createElement('div');
     $buttonContainer->setAttribute('class', 'chicory-order-ingredients-container');
-    $buttonContainer->setAttribute('style', 'margin:10px !important');
+    $buttonContainer->setAttribute('style', 'margin-top:10px !important');
 
     // Microdata format (Easyrecipe, Recipe Card)
     if ($xpath->query('//*[contains(@itemtype, "//schema.org/Recipe") or contains(@itemtype, "//schema.org/recipe")]')->length) {
