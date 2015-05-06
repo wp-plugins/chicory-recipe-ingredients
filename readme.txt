@@ -2,7 +2,7 @@
 Contributors: chicory
 Donate link: http://www.chicoryapp.com/
 Tags: chicory, recipe, ingredients, chicoryapp, grocery, store, cook, button
-Requires at least: 3.0
+Requires at least: 2.0.1
 Tested up to: 4.2.1
 Stable tag: 1.10
 License: GPLv2 or later
