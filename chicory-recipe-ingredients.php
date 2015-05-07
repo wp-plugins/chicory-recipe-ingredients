@@ -3,13 +3,13 @@
 Plugin Name: Chicory Recipe Ingredients
 Plugin URI: http://chicoryapp.com/
 Description: Chicory connects your recipes directly to leading online grocery stores. The Chicory recipe plugin displays a “get ingredients delivered’ button before or after your recipe, letting  readers cook the  recipes they discover on your site without even having to make a trip to the grocery store.
-Version: 2.0.1
+Version: 2.0.2
 Text Domain: chicory-recipe
 Author: Chicory
 Author URI: http://chicoryapp.com/
 */
 
-define('CHICORY_PLUGIN_VERSION', 		'2.0.1');
+define('CHICORY_PLUGIN_VERSION', 		'2.0.2');
 define('CHICORY_PLUGIN_URL', 			plugin_dir_url(__FILE__));
 define('CHICORY_PLUGIN_PATH',			plugin_dir_path(__FILE__));
 define('CHICORY_PLUGIN_BASENAME', 		plugin_basename(__FILE__));
