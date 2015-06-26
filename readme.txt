@@ -4,7 +4,7 @@ Donate link: http://www.chicoryapp.com/
 Tags: chicory, recipe, ingredients, chicoryapp, grocery, store, cook, button
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,7 +81,11 @@ Easy! Our tool actually assumes you’ve got certain staples--they will appear g
 
 == Changelog ==
 
-= 2.0.2
+= 2.0.3 = 
+* Updating description, FAQ, and icon image
+
+
+= 2.0.2 =
 * Moving button placement logic to external system
 * Restricting button to singular pages only
 
