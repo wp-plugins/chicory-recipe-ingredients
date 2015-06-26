@@ -8,11 +8,9 @@ Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Chicory connects your recipes directly to leading online grocery stores.
+Chicory helps food blogs monetize recipes and connects recipes directly to leading online grocers like Peapod and Amazon
 
 == Description ==
-
-= Chicory helps food blogs monetize recipes and connects recipes directly to leading online grocers like Peapod and Amazon =
 
 Food bloggers can use Chicory to monetize their sites in new and innovative ways, connect their recipes to online grocers like Peapod and Amazon, get deep insights into how readers are engaging with recipes and join a growing community of food blogs and food lovers.
 
